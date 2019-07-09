@@ -1,0 +1,74 @@
+/************ reset css ***************/
+html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+ul{list-style:none}
+button,input,select,textarea{margin:0}
+html{box-sizing:border-box}
+*,*:before,*:after{box-sizing:inherit}
+/*img,video{height:auto;}*/
+iframe{border:0}
+table{border-collapse:collapse;border-spacing:0}
+td,th{padding:0;text-align:left}
+
+
+body,html{
+  height: 100%;
+}
+
+#wrap{
+  height: 100%;
+  background-color: cornsilk;
+  /*头部样式*/
+  #head-main{
+    background-color: aquamarine;
+    height: 80px;
+    .header-main{
+      position: relative;
+      width: 1100px;
+      height: 80px;
+      margin: 0 auto;
+      background-color: antiquewhite;
+      .header-main-logo{
+        float: left;
+        margin-top: 15px;
+      }
+      .header-main-nav{
+        float: right;
+        li{
+          float: left;
+          margin-top: 50px;
+          position: relative;
+          margin-left: 40px;
+          color:  #009EE0;
+          &:first-child .header-main-bottom{
+            width: 100%;
+          }
+          &:hover .header-main-bottom{
+            cursor: pointer;
+            width: 100%;
+          }
+          .header-main-bottom{
+            color: #000;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            overflow: hidden;
+            transition: 1s width;
+          }
+        }
+      }
+      .header-main-arrow{
+        width: 18px;
+        height: 11px;
+        position: absolute;
+        left: 0;
+        bottom: -11px;
+        transition: 1s left;
+      }
+    }
+  }
+}
+
+
+
+
