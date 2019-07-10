@@ -1,19 +1,24 @@
 window.onload = function () {
+    //获取元素
     var headerNavLi = document.querySelectorAll(".header-main-nav li");
     var headBottom = document.querySelectorAll(".header-main-bottom");
     var headerArrow = document.querySelector(".header-main-arrow");
-
     var content = document.querySelector("#content");
     var contentList = document.querySelector(".content-lists");
+    var homePoint = document.querySelectorAll(".home-point li");
+    var homeCarousel = document.querySelectorAll(".home-carousel li");
+    var home = document.querySelector(".home");
 
-    //移动小图标的宽度/2
-    var arrowWidth = headerArrow.width / 2;
-    //定义一个变量保存li的下标
-    var index = 0;
-    //定义一个变量保存容器content的高度
-    var contentHeight = content.offsetHeight;
 
+    //定义变量
+    var arrowWidth = headerArrow.width / 2;//移动小图标的宽度/2
+    var index = 0;//定义一个变量保存li的下标
+    var contentHeight = content.offsetHeight;//定义一个变量保存容器content的高度
     var isFirst = true;
+    var autoTime = null; //自动切换计时器
+    var lastIndex = 0;//保存上一次点击的小图标下标
+    var timer = null;//防抖定时器
+    var lastTime = 0;//节流，保存上一次触发的时间
 
     setLeft(headerNavLi[0]);
     //封装函数，改变移动小图标的left值
@@ -39,10 +44,6 @@ window.onload = function () {
     content.addEventListener("DOMMouseScroll", function (event) {
         mouseWheel(event);
     });
-
-
-    //防抖计时器
-    var timer = null;
 
     //封装鼠标滚动事件
     function mouseWheel(event) {
@@ -94,6 +95,7 @@ window.onload = function () {
 
     }
 
+    move(1);
     //封装函数，鼠标滚动时，设置ul的位置，设置li的width，设置arrow的位置
     function move(index){
         // 去除第一个active
@@ -115,6 +117,59 @@ window.onload = function () {
     window.onresize = function () {
         contentHeight = content.offsetHeight;
         contentList.style.top = index*-contentHeight+"px";
+    }
+
+    /*点击小圆点事件*/
+    for (var i = 0; i <homePoint.length ; i++) {
+        var homePointElement = homePoint[i];
+        homePointElement.index = i;
+        homePointElement.onclick = function () {
+            var nowTime = Date.now();
+            if (nowTime-lastTime <=2000) return;
+            //同步上一次触发的时间
+            lastTime = nowTime;
+            var nowIndex = this.index;
+            //点击自己
+            if(nowIndex === lastIndex) return;
+            if(nowIndex>lastIndex){
+                //点击右边
+                homeCarousel[nowIndex].className = "right-show active";
+                homeCarousel[lastIndex].className = "left-hide";
+            }else{
+                //点击左边
+                homeCarousel[nowIndex].className = "left-show active";
+                homeCarousel[lastIndex].className = "right-hide";
+            }
+            //给小圆点设置点击的类名
+            homePoint[nowIndex].className = "active";
+            homePoint[lastIndex].className = "";
+            lastIndex = nowIndex;
+        }
+    }
+
+    //自动切换
+    autoMove();
+    function autoMove(){
+        autoTime = setInterval(function () {
+            var nowIndex = lastIndex+1;
+            if (nowIndex>3)  nowIndex = 0;
+            //切换页面
+            homeCarousel[nowIndex].className = "right-show active";
+            homeCarousel[lastIndex].className = "left-hide";
+            //小图标自动走
+            homePoint[nowIndex].className = "active";
+            homePoint[lastIndex].className = "";
+            //同步lastIndex
+            lastIndex = nowIndex;
+        },2500);
+    }
+    //鼠标移入事件
+    home.onmouseenter = function () {
+        clearInterval(autoTime);
+    }
+    //鼠标移出事件
+    home.onmouseleave = function () {
+        autoMove();
     }
 
 }
