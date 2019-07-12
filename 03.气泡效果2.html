@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body{
+        background: grey;
+      }
+      #myCanvas{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+
+        background: white;
+      }
+
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="400">
+  暂不支持canvas....
+</canvas>
+<script type="text/javascript">
+  // 获取canvas
+  var canvas = document.getElementById('myCanvas');
+
+  if (canvas.getContext) {
+    var arr = [];
+    //随机画圆
+    setInterval(function () {
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0,0,400,400);
+      for (var i = 0; i <arr.length ; i++) {
+        var item = arr[i];
+        item.R++;
+        item.a-=0.01;
+        if (item.a<=0){
+          arr.splice(i,1);
+          i--;
+        }
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgb(${item.r},${item.g},${item.b},${item.a})`
+        ctx.arc(item.x,item.y,item.R,0,2*Math.PI);
+        ctx.fill();
+      }
+
+    },1000/16);
+
+    /产生随机位置和随机颜色/
+    setInterval(function () {
+      var x = Math.random()*400;
+      var y = Math.random()*400;
+
+      var R = 10;
+
+      var r = Math.random()*255;
+      var g = Math.random()*255;
+      var b = Math.random()*255;
+      var a = 1;
+
+      arr.push(
+        {
+          x:x,
+          y:y,
+          R:R,
+          r:r,
+          g:g,
+          b:b,
+          a:a
+        }
+      );
+    },300);
+  }
+
+
+
+</script>
+</body>
+</html>

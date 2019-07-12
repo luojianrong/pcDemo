@@ -107,6 +107,7 @@ body,html{
     height: 20%;
     background-repeat: no-repeat;
     position: relative;
+    overflow: hidden;
     .content-lists-div{
       width: 1100px;
       height: 520px;
@@ -116,9 +117,18 @@ body,html{
       right: 0;
       margin: auto;
       position: absolute;
-     // background-color: pink;
     }
   }
+}
+#team{
+  width: 1100px;
+  height: 520px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
 }
 
 /*span公共样式*/
@@ -142,6 +152,8 @@ body,html{
 .works{
   .works-title{
     margin: 50px 0 100px 50px;
+    position: relative;
+    z-index: 33;
   }
   .works-robot{
     position: absolute;
@@ -154,6 +166,8 @@ body,html{
   .works-lists{
     display: flex;
     margin-left: 50px;
+    position: relative;
+    z-index: 33;
     li{
       width: 220px;
       height: 133px;
@@ -222,7 +236,7 @@ body,html{
   color: #fff;
 }
 
-.about-lists>li{
+/*.about-lists>li{
   position: absolute;
   width: 260px;
   height: 200px;
@@ -269,31 +283,31 @@ body,html{
   background-position: 0 0;
 }
 .about-photo-two{
-  /*background-position: -130px 0;*/
+  !*background-position: -130px 0;*!
   background-position: 100% 0;
 }
 .about-photo-three{
-  /*background-position: 0 -100px;*/
+  !*background-position: 0 -100px;*!
   background-position: 0 100%;
 }
 .about-photo-four{
-  /*background-position: -130px -100px;*/
+  !*background-position: -130px -100px;*!
   background-position: 100% 100%;
 }
 .about-photo:hover .about-photo-one{
-  /*transform: translateY(100px);*/
+  !*transform: translateY(100px);*!
   background-position: 0 100px;
 }
 .about-photo:hover .about-photo-two{
-  /*transform: translateX(-130px);*/
+  !*transform: translateX(-130px);*!
   background-position: -260px 0;
 }
 .about-photo:hover .about-photo-three{
-  /*transform: translateX(130px);*/
+  !*transform: translateX(130px);*!
   background-position: 130px -100px;
 }
 .about-photo:hover .about-photo-four{
-  /*transform: translateY(-100px);*/
+  !*transform: translateY(-100px);*!
   background-position: -130px -200px;
 }
 
@@ -301,9 +315,45 @@ body,html{
   position: absolute;
   right: 196px;
   top: -16px;
+}*/
+.about-lists>li{
+  width: 260px;
+  height: 200px;
+  border: 5px solid rgba(255,255,255,0.5);
+  border-radius: 8px;
+  box-sizing: content-box;
+}
+.about-photo-lists li{
+  position: absolute;
+  width: 260px;
+  height: 200px;
+  left: 0;
+  top: 0;
+}
+.about-lists .about-photo-first{
+  transition: 1s transform;
+  position: absolute;
+  left:750px;
+  top:50px;
+}
+.about-lists .about-photo-second{
+  transition: 1s transform;
+  position: absolute;
+  left:600px;
+  top:290px;
+}
+.about-photo-lists .about-photo-lists li{
+  background-image: url('../imgs/about1.jpg');;
+}
+.about-photo-second .about-photo-lists li{
+  background-image: url('../imgs/about3.jpg');;
 }
 
+
 /*第一屏样式*/
+.home{
+  transition: 1s transform;
+}
 .home-carousel{
   width: 100%;
   height: 100%;
@@ -407,8 +457,12 @@ body,html{
 }
 .course-title{
   margin: 50px;
+  position: relative;
+  z-index: 22;
 }
 .course-content{
+  position: relative;
+  z-index: 22;
   width: 400px;
   margin-left: 50px;
 }
@@ -419,6 +473,7 @@ body,html{
   top: 70px;
   overflow: hidden;
   transform-style: preserve-3d ;
+  z-index: 33;
 }
 #course-lists>li{
   float: left;
@@ -452,5 +507,91 @@ body,html{
   transform: rotateY(180deg);
   transition:transform 1s;
 }
+
+
+/*第五屏样式*/
+.team-title{
+  transition: 1s transform;
+  margin: 50px;
+  float: left;
+}
+.team-content{
+  transition: 1s transform;
+  margin: 50px;
+  width: 400px;
+  float: right;
+  color: #fff;
+}
+.team-lists{
+  width: 944px;
+  height: 448px;
+  position: absolute;
+  top: 230px;
+  display: flex;
+  left: 50%;
+  margin-left: -472px;
+}
+#team-lists>li{
+  width: 236px;
+  height: 100%;
+  background-image: url("../imgs/team.png");
+  background-repeat: no-repeat;
+  &:nth-child(1){
+    background-position: 3px 0px;
+  }
+  &:nth-child(2){
+    background-position: -230px 0px;
+  }
+  &:nth-child(3){
+    background-position: -483px 0px;
+  }
+  &:nth-child(4){
+    background-position: -710px 0px;
+  }
+}
+
+
+.myCanvas {
+  position: absolute;
+}
+/*音乐图标的样式*/
+.header-main-music{
+  float: left;
+  width: 14px;
+  height: 14px;
+  margin: 50px 0 0 5px;
+  cursor: pointer;
+  background-image: url('../imgs/musicoff.gif');
+}
+
+/********* 侧边导航 ********/
+.content-point{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.content-point li{
+  width: 15px;
+  height: 15px;
+  border: 1px solid white;
+  margin-top: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.content-point .active{
+  background: white;
+}
+
+//出入场样式
+.plane1{ width:359px; height:283px; background:url(../imgs/plane1.png) no-repeat; position:absolute; left:300px; top:-100px; transition:1s transform;}
+.plane2{ width:309px; height:249px; background:url(../imgs/plane2.png) no-repeat; position:absolute; left:-100px; top:200px; transition:1s transform;}
+.plane3{ width:230px; height:182px; background:url(../imgs/plane3.png) no-repeat; position:absolute; left:300px; top:400px; transition:1s transform;}
+
+
+.pencel1{ width:180px; height:97px; background:url(../imgs/pencel1.png) no-repeat; position:absolute; transition:1s transform; left:500px; top:0;}
+.pencel2{ width:268px; height:38px; background:url(../imgs/pencel2.png) no-repeat; position:absolute; transition:1s transform; left:300px; top:250px;}
+.pencel3{ width:441px; height:231px; background:url(../imgs/pencel3.png) no-repeat; position:absolute; transition:1s transform; left:650px; top:300px;}
 
 
