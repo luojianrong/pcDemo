@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    background: grey;
+  }
+  #myCanvas{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    background: white;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="150" height="400">
+
+</canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById('myCanvas');
+
+  if (canvas.getContext) {
+
+    var arr = [];
+    var ctx = canvas.getContext('2d');
+
+    // 画圆
+    setInterval(function () {
+
+      // 清除画布
+      ctx.clearRect(0, 0, 150, 400);
+
+      for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+
+        // 产生正弦运动
+        // 角度递增 --> 决定运动的速度
+        item.deg += 2;
+        // 根据角度求弧度
+        var rad = item.deg * Math.PI / 180;
+        // 求得横坐标和纵坐标的值
+        var x = item.x + item.scale * Math.sin(rad);
+        var y = item.y - item.scale * rad;
+
+        ctx.fillStyle = `rgb(${item.r}, ${item.g}, ${item.b})`;
+        ctx.beginPath();
+        ctx.arc(x, y, item.R, 0, 2 * Math.PI);
+        ctx.fill();
+
+      }
+
+    }, 1000 / 60);
+
+    // 产生圆
+    setInterval(function () {
+      // 随机颜色
+      var r = Math.round(Math.random() * 255);
+      var g = Math.round(Math.random() * 255);
+      var b = Math.round(Math.random() * 255);
+      // 随机半径
+      var R = Math.round(Math.random() * 8  + 2);
+      // 随机初始位置
+      var y = 400 + R;
+      var x = Math.round(Math.random() * 150);
+      // 随机缩放系数
+      var scale = Math.round(Math.random() * 50  + 50);
+
+      // 添加到数组
+      arr.push({
+        r: r,
+        g: g,
+        b: b,
+        x: x,
+        y: y,
+        R: R,
+        deg: 0,
+        scale: scale
+      });
+
+    }, 100)
+
+  }
+
+</script>
+</body>
+</html>
